@@ -1,0 +1,20 @@
+namespaces:
+  - name: giantswarm-flux
+    labels:
+      name: giantswarm-flux
+  - name: giantswarm
+    labels:
+      name: giantswarm
+  - name: monitoring
+    labels:
+      name: monitoring
+  - name: org-giantswarm
+    labels:
+      name: org-giantswarm
+  - name: flux-system
+    labels:
+      name: flux-system
+  - name: flux-giantswarm
+    labels:
+      name: flux-giantswarm
+  - name: policy-exception

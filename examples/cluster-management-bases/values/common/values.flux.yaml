@@ -1,0 +1,9 @@
+images:
+  registry: docker.io
+clusterRoles:
+  install: false
+crds:
+  install: true
+verticalPodAutoscaler:
+  enabled: true
+  force: true

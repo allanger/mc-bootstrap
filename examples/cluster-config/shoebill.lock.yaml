@@ -1,0 +1,13 @@
+- chart: flux-app
+  release: flux-giantswarm
+  version: 1.2.0-faa5f89120c052b3d5850504a5ed86ab93b89b55
+  namespace: flux-system
+  repourl: https://giantswarm.github.io/giantswarm-test-catalog/
+  reponame: flux-app
+  gitcommit: db08e336a622174e634ef254ad7d2cbfcab50fe2
+  values:
+  - flux-system-flux-giantswarm-values.flux-aws.yaml
+  - flux-system-flux-giantswarm-values.flux.yaml
+  - flux-system-flux-giantswarm-values.flux-aws.yaml
+  - flux-system-flux-giantswarm-values.flux.yaml
+  secrets: []

@@ -1,0 +1,22 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  creationTimestamp: null
+  name: vpa
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: vpa
+      sourceRef:
+        kind: HelmRepository
+        name: fairwinds-stable
+        namespace: flux-system
+      version: 4.4.1
+  install:
+    crds: Create
+    createNamespace: true
+  interval: 1m0s
+  releaseName: vpa
+  targetNamespace: giantswarm
+status: {}

@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  flux-system-flux-giantswarm-values.flux.yaml: |
+    images:
+      registry: docker.io
+    clusterRoles:
+      install: false
+    crds:
+      install: true
+    verticalPodAutoscaler:
+      enabled: true
+      force: true
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    shoebill-chart: flux-app
+    shoebill-release: flux-giantswarm
+  name: flux-system-flux-giantswarm-values.flux.yaml
+  namespace: flux-system

@@ -20,7 +20,7 @@ releases:
     createNamespace: false
     installed: true
     values:
-      - ./k8s-configs/namespaces/values.yaml
+      - ./k8s-config/namespaces/values.yaml
 
   - name: {{ requiredEnv "FLUX_RELEASE" }}
     chart: flux-app/flux-app
@@ -37,15 +37,15 @@ releases:
     values:
       # Now we can install CRDs like that
       # because flux won't install itself
-      - ./k8s-configs/values/common/values.flux.yaml
-      - ./k8s-configs/values/{{ .Environment.Name }}/values.flux-aws.yaml
+      - ./k8s-config/values/common/values.flux.yaml
+      - ./k8s-config/values/{{ .Environment.Name }}/values.flux-aws.yaml
   
   - name: root
     version: 0.1.5
     chart: badhouseplants-oci/root
     namespace: flux-system
     createNamespace: false
-    installed: true
+    installed: false
     values:
-      - ./k8s-configs/root/values.yaml
+      - ./k8s-config/root/values.yaml
 

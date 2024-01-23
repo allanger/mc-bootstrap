@@ -1,0 +1,29 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  creationTimestamp: null
+  name: flux-giantswarm
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: flux-app
+      sourceRef:
+        kind: HelmRepository
+        name: flux-app
+        namespace: flux-system
+      version: 1.2.0-faa5f89120c052b3d5850504a5ed86ab93b89b55
+  install:
+    crds: Create
+    createNamespace: true
+  interval: 1m0s
+  releaseName: flux-giantswarm
+  targetNamespace: flux-system
+  valuesFrom:
+  - kind: ConfigMap
+    name: flux-system-flux-giantswarm-values.flux-aws.yaml
+    valuesKey: flux-system-flux-giantswarm-values.flux-aws.yaml
+  - kind: ConfigMap
+    name: flux-system-flux-giantswarm-values.flux.yaml
+    valuesKey: flux-system-flux-giantswarm-values.flux.yaml
+status: {}

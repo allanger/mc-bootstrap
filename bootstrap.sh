@@ -23,8 +23,8 @@ done
 # Helm release will be installed to the default namespace
 # ---------------------------------------------------------------------
 # Prepare the environment
-rm -rf k8s-configs
-git clone git@git.badhouseplants.net:giantswarm/k8s-configs.git
+rm -rf k8s-config
+git clone git@github.com:allanger/k8s-config.git
 source .env
 
 helmfile -l name=namespaces apply

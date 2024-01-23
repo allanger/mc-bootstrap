@@ -1,0 +1,11 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  creationTimestamp: null
+  name: flux-app
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  type: default
+  url: https://giantswarm.github.io/giantswarm-test-catalog/
+status: {}

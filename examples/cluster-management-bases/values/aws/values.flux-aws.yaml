@@ -1,0 +1,4 @@
+providerData:
+  enabled: true
+  name: aws
+  url: https://github.com/giantswarm/aws-app-collection

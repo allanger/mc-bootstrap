@@ -1,0 +1,15 @@
+apiVersion: v1
+data:
+  flux-system-flux-giantswarm-values.flux-aws.yaml: |
+    providerData:
+      enabled: true
+      name: aws
+      url: https://github.com/giantswarm/aws-app-collection
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    shoebill-chart: flux-app
+    shoebill-release: flux-giantswarm
+  name: flux-system-flux-giantswarm-values.flux-aws.yaml
+  namespace: flux-system

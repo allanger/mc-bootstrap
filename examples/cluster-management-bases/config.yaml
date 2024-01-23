@@ -1,0 +1,35 @@
+---
+repositories:
+  - name: flux-app
+    url: https://giantswarm.github.io/giantswarm-test-catalog/
+charts:
+  - name: flux-app
+    repository: flux-app
+    version: 1.2.0-faa5f89120c052b3d5850504a5ed86ab93b89b55
+
+releases:
+  - name: flux-giantswarm
+    chart: flux-app
+    version: 1.2.0-faa5f89120c052b3d5850504a5ed86ab93b89b55
+    repository: flux-app
+    installed: true
+    namespace: flux-system
+    createNamespace: false
+    values:
+      - ./values/aws/values.flux-aws.yaml
+      - ./values/common/values.flux.yaml
+
+clusters:
+  - name: cluster-shoebill-test
+    git: git@git.badhouseplants.net:giantswarm/cluster-example.git
+    dotsops: |
+      creation_rules:
+        - path_regex: secrets/.*.yaml
+          key_groups:
+          - age:
+            - age16svfskd8x75g62f5uwpmgqzth52rr3wgv9m6rxchqv6v6kzmzf0qvhr2pk
+    provider: flux
+    releases:
+      - namespaces
+      - flux-giantswarm
+      - vpa
