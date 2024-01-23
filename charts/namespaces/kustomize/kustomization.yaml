@@ -1,0 +1,5 @@
+resources:
+  - ./giantswarm-flux.yml
+  - ./giantswarm.yml
+  - ./monitoring.yml
+  - ./org-giantswarm.yml

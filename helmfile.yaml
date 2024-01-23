@@ -1,0 +1,51 @@
+---
+environments:
+  aws: 
+  capz:
+  capa:
+
+---
+repositories:
+  - name: flux-app
+    url: https://giantswarm.github.io/giantswarm-test-catalog/
+  - name: badhouseplants-oci
+    url: git.badhouseplants.net/allanger/helm
+    oci: true
+
+releases:
+  - name: namespaces
+    version: 0.1.0
+    chart: badhouseplants-oci/namespaces
+    namespace: default
+    createNamespace: false
+    installed: true
+    values:
+      - ./k8s-configs/namespaces/values.yaml
+
+  - name: {{ requiredEnv "FLUX_RELEASE" }}
+    chart: flux-app/flux-app
+    # As I know it renovate can take care of upgrading this version
+    # but since we need it only on bootstrap, a small drift should 
+    # not a problem. Only when there are breaking changes
+    version: {{ requiredEnv "FLUX_VERSION" }}
+    # Namespace is created in the previous step. It's a bit of chicken-eff
+    # but it will appear only when you run helmfile diff or helmfile apply.
+    # If you need to sync the whole helmfile and be sure it's going to 
+    # create everything, just run helmfile sync
+    namespace: {{ requiredEnv "FLUX_NAMESPACE" }}
+    createNamespace: false
+    values:
+      # Now we can install CRDs like that
+      # because flux won't install itself
+      - ./k8s-configs/values/common/values.flux.yaml
+      - ./k8s-configs/values/{{ .Environment.Name }}/values.flux-aws.yaml
+  
+  - name: root
+    version: 0.1.5
+    chart: badhouseplants-oci/root
+    namespace: flux-system
+    createNamespace: false
+    installed: true
+    values:
+      - ./k8s-configs/root/values.yaml
+

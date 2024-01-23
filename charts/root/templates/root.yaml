@@ -1,0 +1,25 @@
+{{ if .Capabilities.APIVersions.Has "source.toolkit.fluxcd.io/v1" }}
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: root
+spec:
+  interval: 30s
+  url: {{ .Values.url }}
+  ref:
+    branch: {{ .Values.branch }}
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: root
+spec:
+  interval: 30s
+  targetNamespace: flux-system
+  sourceRef:
+    kind: GitRepository
+    name: root
+  path: "."
+  prune: false
+  timeout: 1m
+{{- end }}
